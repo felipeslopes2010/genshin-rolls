@@ -17,28 +17,26 @@ body {
 #formulario {
   margin-left: 750px;
   margin-top: 200px;
-  width: 800px;
 }
 
 #modal {
+  width: 800px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 40px;
+  gap: 24px;
   color: rgb(255, 255, 255);
   background-color: rgb(87, 54, 194);
-  height: 250px;
-  padding: 20px;
-  gap: 24px;
 }
 
 #segundoModal {
   flex-direction: column;
   color: rgb(255, 255, 255);
   background-color: rgb(87, 54, 194);
-  height: 110px;
-  padding: 5px;
   gap: 24px;
+  margin-top: -25px;
 }
 
 #modal h1 {
@@ -94,6 +92,7 @@ input::-webkit-inner-spin-button {
   font-size: 2rem;
   background-color: rgb(87, 54, 194);
   padding: 15px;
+  margin-top: -6px;
 }
 
 #segundoModal p {
@@ -106,7 +105,8 @@ input::-webkit-inner-spin-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 8px;
+  padding: 10px;
   font-size: 20px;
   gap: 10px;
 }
