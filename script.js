@@ -2,10 +2,11 @@ const botao = document.querySelector("#botao-calculo");
 const qtdGemasInputField = document.querySelector("#quantidade-tiros");
 const modal = document.querySelector("#modal");
 const segundoModal = document.querySelector("#segundoModal");
-const checkboxSim = document.querySelector("#checkboxSim");
-const checkboxNao = document.querySelector("#checkboxNao");
+const radioSim = document.querySelector("#radioSim");
+const radioNao = document.querySelector("#radioNao");
 let qtdTirosDisponiveis;
 let qtdTirosDisponiveisInteger;
+let qtdTirosNecessarios;
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
@@ -57,26 +58,45 @@ function limpaSegundoParagrafo(segundoModal) {
   }
 }
 
-checkboxSim.addEventListener("change", (e) => {
+radioSim.addEventListener("change", (e) => {
   if (!e.target.checked) return;
 
+  radioNao.checked = false;
   limpaSegundoParagrafo(modal);
   limpaSegundoParagrafo(segundoModal);
-  let qtdTirosNecessarios = 90 - qtdTirosDisponiveisInteger;
-  let segundoParagrafo = document.createElement("p");
-  segundoParagrafo.setAttribute("class", "segundoParagrafo");
-  segundoParagrafo.innerHTML = `Faltam apenas ${qtdTirosNecessarios} tiros para garantir o teu 5⭐`;
-  segundoModal.appendChild(segundoParagrafo);
+
+  if (qtdTirosDisponiveisInteger < 90) {
+    qtdTirosNecessarios = 90 - qtdTirosDisponiveisInteger;
+    let segundoParagrafo = document.createElement("p");
+    segundoParagrafo.setAttribute("class", "segundoParagrafo");
+    segundoParagrafo.innerHTML = `Faltam apenas ${qtdTirosNecessarios} tiros para garantir o teu 5⭐`;
+    segundoModal.appendChild(segundoParagrafo);
+  } else {
+    let segundoParagrafo = document.createElement("p");
+    segundoParagrafo.setAttribute("class", "segundoParagrafo");
+    segundoParagrafo.innerHTML = `Parabéns, o teu 5⭐ está garantindo!`;
+    segundoModal.appendChild(segundoParagrafo);
+  };
+
 });
 
-checkboxNao.addEventListener("change", (e) => {
+radioNao.addEventListener("change", (e) => {
   if (!e.target.checked) return;
 
+  radioSim.checked = false;
   limpaSegundoParagrafo(modal);
   limpaSegundoParagrafo(segundoModal);
-  let qtdTirosNecessarios = 180 - qtdTirosDisponiveisInteger;
-  let segundoParagrafo = document.createElement("p");
-  segundoParagrafo.setAttribute("class", "segundoParagrafo");
-  segundoParagrafo.innerHTML = `Faltam apenas ${qtdTirosNecessarios} tiros para garantir o teu 5⭐`;
-  segundoModal.appendChild(segundoParagrafo);
+
+  if (qtdTirosDisponiveisInteger < 180) {
+    qtdTirosNecessarios = 180 - qtdTirosDisponiveisInteger;
+    let segundoParagrafo = document.createElement("p");
+    segundoParagrafo.setAttribute("class", "segundoParagrafo");
+    segundoParagrafo.innerHTML = `Faltam apenas ${qtdTirosNecessarios} tiros para garantir o teu 5⭐`;
+    segundoModal.appendChild(segundoParagrafo);
+  } else {
+    let segundoParagrafo = document.createElement("p");
+    segundoParagrafo.setAttribute("class", "segundoParagrafo");
+    segundoParagrafo.innerHTML = `Parabéns, o teu 5⭐ está garantindo!`;
+    segundoModal.appendChild(segundoParagrafo);
+  }
 });

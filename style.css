@@ -111,8 +111,8 @@ input::-webkit-inner-spin-button {
   gap: 10px;
 }
 
-input.checkboxSim,
-input.checkboxNao {
+input.radioSim,
+input.radioNao {
   width: 20px;
   height: 20px;
 }
