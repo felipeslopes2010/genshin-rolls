@@ -90,6 +90,8 @@ input::-webkit-inner-spin-button {
 .segundoParagrafo {
   width: 800px;
   font-size: 2rem;
+  display: flex;
+  justify-content: center;
   background-color: rgb(87, 54, 194);
   padding: 15px;
   margin-top: -6px;

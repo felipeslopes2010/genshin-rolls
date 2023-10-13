@@ -31,8 +31,20 @@ function calculaTiros() {
     return;
   }
 
+  if (qtdGemasInputField.value > 28800) {
+    limpaSegundoParagrafo(modal);
+    let segundoParagrafo = document.createElement("p");
+    segundoParagrafo.setAttribute("class", "segundoParagrafo");
+    segundoParagrafo.innerHTML = `Parabéns, o teu 5⭐ está garantindo!`;
+    modal.appendChild(segundoParagrafo);
+    limpaPagina(modal);
+    segundoModal.classList.add("hiden");
+    return;
+  }
+
   if (qtdGemasInputField.value) {
     limpaPagina(modal);
+    limpaSegundoParagrafo(modal);
 
     let paragrafo = document.createElement("p");
     paragrafo.setAttribute("class", "paragrafo");
