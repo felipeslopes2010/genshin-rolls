@@ -7,6 +7,7 @@ const radioNao = document.querySelector("#radioNao");
 let qtdTirosDisponiveis;
 let qtdTirosDisponiveisInteger;
 let qtdTirosNecessarios;
+let radioValue;
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
@@ -44,7 +45,8 @@ function calculaTiros() {
 
   if (qtdGemasInputField.value) {
     limpaPagina(modal);
-    limpaSegundoParagrafo(modal);
+    calculaQuantidadeTiros();
+    atualizaSegundoModal(qtdTirosNecessarios);
 
     let paragrafo = document.createElement("p");
     paragrafo.setAttribute("class", "paragrafo");
@@ -52,6 +54,29 @@ function calculaTiros() {
     modal.appendChild(paragrafo);
     segundoModal.classList.remove("hiden");
   }
+
+  radioSim.addEventListener("change", (e) => {
+    if (!e.target.checked) return;
+
+    radioValue = true;
+    radioNao.checked = false;
+    limpaSegundoParagrafo(modal);
+    limpaSegundoParagrafo(segundoModal);
+    calculaQuantidadeTiros();
+    criaSegundoParagrafo(qtdTirosNecessarios);
+    console.log(qtdTirosNecessarios);
+  });
+
+  radioNao.addEventListener("change", (e) => {
+    if (!e.target.checked) return;
+
+    radioValue = false;
+    radioSim.checked = false;
+    limpaSegundoParagrafo(modal);
+    limpaSegundoParagrafo(segundoModal);
+    calculaQuantidadeTiros();
+    criaSegundoParagrafoRadioNao(qtdTirosNecessarios);
+  });
 }
 
 function limpaPagina(modal) {
@@ -68,17 +93,10 @@ function limpaSegundoParagrafo(segundoModal) {
       segundoModal.removeChild(element);
     }
   }
-}
+};
 
-radioSim.addEventListener("change", (e) => {
-  if (!e.target.checked) return;
-
-  radioNao.checked = false;
-  limpaSegundoParagrafo(modal);
-  limpaSegundoParagrafo(segundoModal);
-
+function criaSegundoParagrafo(qtdTirosNecessarios) {
   if (qtdTirosDisponiveisInteger < 90) {
-    qtdTirosNecessarios = 90 - qtdTirosDisponiveisInteger;
     let segundoParagrafo = document.createElement("p");
     segundoParagrafo.setAttribute("class", "segundoParagrafo");
     segundoParagrafo.innerHTML = `Faltam apenas ${qtdTirosNecessarios} tiros para garantir o teu 5⭐`;
@@ -89,18 +107,10 @@ radioSim.addEventListener("change", (e) => {
     segundoParagrafo.innerHTML = `Parabéns, o teu 5⭐ está garantindo!`;
     segundoModal.appendChild(segundoParagrafo);
   };
+}
 
-});
-
-radioNao.addEventListener("change", (e) => {
-  if (!e.target.checked) return;
-
-  radioSim.checked = false;
-  limpaSegundoParagrafo(modal);
-  limpaSegundoParagrafo(segundoModal);
-
+function criaSegundoParagrafoRadioNao(qtdTirosNecessarios) {
   if (qtdTirosDisponiveisInteger < 180) {
-    qtdTirosNecessarios = 180 - qtdTirosDisponiveisInteger;
     let segundoParagrafo = document.createElement("p");
     segundoParagrafo.setAttribute("class", "segundoParagrafo");
     segundoParagrafo.innerHTML = `Faltam apenas ${qtdTirosNecessarios} tiros para garantir o teu 5⭐`;
@@ -111,4 +121,23 @@ radioNao.addEventListener("change", (e) => {
     segundoParagrafo.innerHTML = `Parabéns, o teu 5⭐ está garantindo!`;
     segundoModal.appendChild(segundoParagrafo);
   }
-});
+}
+
+function atualizaSegundoModal(qtdTirosNecessarios) {
+  const segundoModal = document.querySelector('.segundoParagrafo');
+  if (segundoModal && qtdTirosDisponiveisInteger < 90 && qtdTirosDisponiveisInteger < 180) {
+    segundoModal.innerHTML = `Faltam apenas ${qtdTirosNecessarios} tiros para garantir o teu 5⭐`;
+  }
+
+  if (qtdTirosNecessarios === 0) {
+    segundoModal.innerHTML = `Parabéns, o teu 5⭐ está garantindo!`;
+  }
+}
+
+function calculaQuantidadeTiros() {
+  if (radioValue) {
+    qtdTirosNecessarios = 90 - qtdTirosDisponiveisInteger;
+  } else {
+    qtdTirosNecessarios = 180 - qtdTirosDisponiveisInteger;
+  }
+}
