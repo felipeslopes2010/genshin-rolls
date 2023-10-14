@@ -32,7 +32,7 @@ function calculaTiros() {
     return;
   }
 
-  if (qtdGemasInputField.value > 28800) {
+  if (qtdGemasInputField.value >= 28800) {
     limpaSegundoParagrafo(modal);
     let segundoParagrafo = document.createElement("p");
     segundoParagrafo.setAttribute("class", "segundoParagrafo");
@@ -64,7 +64,6 @@ function calculaTiros() {
     limpaSegundoParagrafo(segundoModal);
     calculaQuantidadeTiros();
     criaSegundoParagrafo(qtdTirosNecessarios);
-    console.log(qtdTirosNecessarios);
   });
 
   radioNao.addEventListener("change", (e) => {
